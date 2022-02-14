@@ -21,10 +21,10 @@ jobs:
 
       - name: Login to Docker Hub
         env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          DOCKER_USER: ${{secrets.DOCKERHUB_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
         run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
 
       - name: Download EarnApp
         run: wget -cq https://brightdata.com/static/earnapp/bin_64 -O ./earnapp && chmod a+x ./earnapp
@@ -38,21 +38,21 @@ jobs:
       - name: Build & Push - Latest Regular
         run: |
           docker buildx build --push \
-          -t fazalfarhan01/earnapp:latest \
-          -t fazalfarhan01/earnapp:$(cat ./version) \
+          -t raduvalentingmail/earnapp:latest \
+          -t raduvalentingmail/earnapp:$(cat ./version) \
           --platform linux/amd64,linux/arm/v7,linux/arm64 build/app
       - name: Build & Push - Latest Lite
         run: |
           docker buildx build --push \
-          -t fazalfarhan01/earnapp:lite \
-          -t fazalfarhan01/earnapp:lite-$(cat ./version) \
+          -t raduvalentingmail/earnapp:lite \
+          -t raduvalentingmail/earnapp:lite-$(cat ./version) \
           --platform linux/amd64,linux/arm/v7,linux/arm64 build/lite
 
       - name: Update Docker Hub Readme
         uses: peter-evans/dockerhub-description@v2
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: fazalfarhan01/earnapp
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: raduvalentingmail/earnapp
           short-description: UNOFFICIAL image for BrightData's EarnApp.
           readme-filepath: DOCKERHUB_README.md
