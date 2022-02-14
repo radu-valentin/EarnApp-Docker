@@ -21,10 +21,10 @@ jobs:
 
       - name: Login to Docker Hub
         env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          DOCKER_USER: ${{secrets.DOCKERHUB_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
         run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
 
       - name: Download EarnApp
         run: wget -cq https://brightdata.com/static/earnapp/bin_64 -O ./earnapp && chmod a+x ./earnapp
@@ -38,6 +38,6 @@ jobs:
       - name: Build & Push - Debian
         run: |
           docker buildx build --push \
-          -t fazalfarhan01/earnapp:debian \
-          -t fazalfarhan01/earnapp:debian-$(cat ./version) \
+          -t raduvalentingmail/earnapp:debian \
+          -t raduvalentingmail/earnapp:debian-$(cat ./version) \
           --platform linux/amd64,linux/arm/v7,linux/arm/v6,linux/arm64 build/debian
