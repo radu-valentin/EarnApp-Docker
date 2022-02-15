@@ -21,8 +21,8 @@ jobs:
 
       - name: Login to Docker Hub
         env:
-          DOCKER_USER: ${{secrets.DockerUser}}
-          DOCKER_PASSWORD: ${{secrets.DockerPassword}}
+          DOCKER_USER: ${{secrets.DOCKERUSER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKERPASSWORD}}
 #          DOCKER_USER: raduvalentingmail
 #          DOCKER_PASSWORD: Vard_3434
         run: |
