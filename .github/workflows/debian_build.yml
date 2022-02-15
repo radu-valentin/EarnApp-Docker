@@ -26,7 +26,10 @@ jobs:
 #          DOCKER_USER: raduvalentingmail
 #          DOCKER_PASSWORD: Vard_3434
         run: |
+          echo ${{ secrets.DOCKERHUB_USER }}
+          echo ${{ secrets.DOCKERHUB_PASSWORD }}
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          
 
       - name: Download EarnApp
         run: wget -cq https://brightdata.com/static/earnapp/bin_64 -O ./earnapp && chmod a+x ./earnapp
