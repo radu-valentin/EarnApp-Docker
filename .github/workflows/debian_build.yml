@@ -23,11 +23,9 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKERUSER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKERPASSWORD }}
-#          DOCKER_USER: raduvalentingmail
-#          DOCKER_PASSWORD: Vard_3434
         run: |
-          echo ${{ $DOCKER_USER }}
-          echo ${{ $DOCKER_PASSWORD }}
+          echo $( $DOCKER_USER )
+          echo $( $DOCKER_PASSWORD )
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           
 
